@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dra. Kamila Azevedo | Estética Avançada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#b8966e',
+            'gold-dark': '#9a7a58',
+            'gold-light': '#f5e9d8',
+            champagne: '#fdf5e6',
+            charcoal: '#2d2d2d',
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: #2d2d2d; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* Gold decorative line */
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, #b8966e, transparent); width: 80px; margin: 0 auto; }
+    .gold-line-full { height: 1px; background: linear-gradient(90deg, transparent, #b8966e 30%, #b8966e 70%, transparent); }
+
+    /* Buttons */
+    .btn-gold {
+      background: #b8966e;
+      color: white;
+      transition: all 0.3s ease;
+      letter-spacing: 0.05em;
+    }
+    .btn-gold:hover { background: #9a7a58; transform: translateY(-1px); box-shadow: 0 8px 25px rgba(184,150,110,0.3); }
+
+    .btn-outline-gold {
+      border: 1.5px solid #b8966e;
+      color: #b8966e;
+      transition: all 0.3s ease;
+      letter-spacing: 0.05em;
+    }
+    .btn-outline-gold:hover { background: #b8966e; color: white; transform: translateY(-1px); }
+
+    /* Cards */
+    .card-hover { transition: all 0.35s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(184,150,110,0.12); }
+
+    /* Procedure card */
+    .procedure-card { border-top: 3px solid #b8966e; transition: all 0.35s ease; }
+    .procedure-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(184,150,110,0.15); }
+
+    /* Quote */
+    .quote-block { border-left: 3px solid #b8966e; padding-left: 1.5rem; }
+
+    /* Floating WhatsApp */
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+      70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+    }
+    .float-pulse { animation: pulse-gold 2.5s infinite; }
+    .float-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #b8966e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .float-btn:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
+    .float-tooltip {
+      position: absolute;
+      right: 70px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #2d2d2d;
+      color: white;
+      font-size: 12px;
+      font-family: 'Montserrat', sans-serif;
+      padding: 6px 12px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .float-btn:hover .float-tooltip { opacity: 1; }
+
+    /* Navbar scroll shadow */
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+
+    /* Section label */
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: #b8966e;
+      text-transform: uppercase;
+    }
+
+    /* Hero diamond divider */
+    .diamond-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+    }
+    .diamond-divider::before,
+    .diamond-divider::after {
+      content: '';
+      height: 1px;
+      width: 80px;
+      background: #b8966e;
+    }
+    .diamond { width: 8px; height: 8px; background: #b8966e; transform: rotate(45deg); }
+
+    /* Fade in */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.9s ease forwards; }
+    .fade-in-delay { animation: fadeInUp 0.9s ease 0.2s both; }
+    .fade-in-delay-2 { animation: fadeInUp 0.9s ease 0.4s both; }
+
+    /* Mobile menu */
+    #mobile-menu { transition: all 0.3s ease; }
+
+    /* Instagram handle */
+    .ig-handle { font-size: clamp(1.5rem, 5vw, 3rem); }
+
+    /* Footer */
+    footer a:hover { color: #b8966e; transition: color 0.3s ease; }
+
+    /* About card icon */
+    .about-icon { width: 48px; height: 48px; color: #b8966e; }
+
+    /* Procedure tag */
+    .proc-tag { font-family: 'Playfair Display', serif; font-style: italic; color: #b8966e; font-size: 13px; }
+
+    /* Saiba mais link */
+    .saiba-mais {
+      color: #b8966e;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.3s ease;
+    }
+    .saiba-mais:hover { gap: 8px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem !important; }
+    }
+  </style>
+</head>
+<body class="bg-white text-charcoal">
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav id="navbar" class="sticky top-0 z-50 bg-white transition-shadow duration-300">
+    <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex-shrink-0">
+        <img src="https://www.genspark.ai/api/files/s/z3DSL9r5" alt="Dra. Kamila Azevedo" class="h-14 w-auto">
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#procedimentos" class="text-charcoal text-sm font-medium tracking-wide hover:text-gold transition-colors duration-200">Procedimentos</a>
+        <a href="#sobre" class="text-charcoal text-sm font-medium tracking-wide hover:text-gold transition-colors duration-200">Sobre</a>
+        <a href="#contato" class="text-charcoal text-sm font-medium tracking-wide hover:text-gold transition-colors duration-200">Contato</a>
+      </div>
+
+      <!-- CTA Button + Burger -->
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/5521998979105" target="_blank"
+           class="hidden md:inline-block btn-outline-gold text-sm font-medium px-5 py-2.5 rounded-sm">
+          Agendar Consulta
+        </a>
+        <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+          <span class="w-6 h-0.5 bg-charcoal block transition-all"></span>
+          <span class="w-6 h-0.5 bg-charcoal block transition-all"></span>
+          <span class="w-5 h-0.5 bg-charcoal block transition-all"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gold-light px-5 py-4">
+      <div class="flex flex-col gap-4">
+        <a href="#procedimentos" class="text-charcoal text-sm font-medium tracking-wide hover:text-gold transition-colors">Procedimentos</a>
+        <a href="#sobre" class="text-charcoal text-sm font-medium tracking-wide hover:text-gold transition-colors">Sobre</a>
+        <a href="#contato" class="text-charcoal text-sm font-medium tracking-wide hover:text-gold transition-colors">Contato</a>
+        <a href="https://wa.me/5521998979105" target="_blank"
+           class="btn-gold text-sm font-medium px-5 py-3 rounded-sm text-center mt-2">
+          Agendar Consulta
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="min-h-[92vh] flex flex-col items-center justify-center bg-white px-5 py-20 text-center">
+    <div class="max-w-3xl mx-auto fade-in">
+
+      <!-- Label -->
+      <div class="flex flex-col items-center gap-3 mb-8">
+        <div class="gold-line"></div>
+        <span class="section-label">Estética Avançada com Rigor Médico</span>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-charcoal leading-tight mb-6" style="line-height:1.1">
+        A Arte de Realçar<br>
+        <span style="color:#b8966e">sua Beleza Natural.</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-base md:text-lg text-gray-500 font-light leading-relaxed mb-10 max-w-xl mx-auto fade-in-delay">
+        Procedimentos Estéticos Avançados com Rigor Médico pela<br class="hidden md:block">
+        <strong class="text-charcoal font-medium">Dra. Kamila Azevedo</strong> — Médica e Biomédica.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 fade-in-delay-2">
+        <a href="https://wa.me/5521998979105" target="_blank"
+           class="btn-gold text-sm font-semibold px-8 py-4 rounded-sm tracking-wider w-full sm:w-auto text-center">
+          ✦ Agendar via WhatsApp
+        </a>
+        <a href="#procedimentos"
+           class="btn-outline-gold text-sm font-medium px-8 py-4 rounded-sm tracking-wider w-full sm:w-auto text-center">
+          Conheça os Procedimentos
+        </a>
+      </div>
+
+      <!-- Trust signals -->
+      <div class="diamond-divider mt-4">
+        <span class="text-xs text-gray-400 font-light tracking-widest">RESULTADOS NATURAIS &amp; SEGUROS</span>
+      </div>
+      <p class="text-xs text-gray-400 font-light tracking-widest mt-3">
+        ✦ Atendimento personalizado &nbsp;&nbsp; ✦ Protocolos rigorosos
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="sobre" class="py-24 px-5" style="background:#fdf5e6;">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Label -->
+      <div class="text-center mb-4">
+        <span class="section-label">Sobre a Dra. Kamila</span>
+      </div>
+      <div class="gold-line mb-6"></div>
+
+      <h2 class="text-3xl md:text-4xl font-serif text-center text-charcoal mb-4">
+        Expertise Médica a Serviço<br>
+        <em class="font-normal" style="color:#b8966e">da Sua Estética</em>
+      </h2>
+      <p class="text-center text-gray-500 font-light text-sm max-w-xl mx-auto mb-14">
+        Com formação dupla em Medicina e Biomedicina, a Dra. Kamila une rigor científico e sensibilidade estética para oferecer os mais avançados procedimentos do mercado.
+      </p>
+
+      <!-- Cards -->
+      <div class="grid md:grid-cols-2 gap-6 mb-14">
+        <!-- Card 1 -->
+        <div class="bg-white p-8 rounded-sm shadow-sm card-hover">
+          <div class="mb-5">
+            <i data-lucide="stethoscope" class="about-icon"></i>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-charcoal mb-3">Médica Formada</h3>
+          <p class="text-gray-500 font-light text-sm leading-relaxed">
+            Graduação em Medicina com especialização em procedimentos estéticos faciais minimamente invasivos, unindo ciência e arte para resultados seguros e naturais.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white p-8 rounded-sm shadow-sm card-hover">
+          <div class="mb-5">
+            <i data-lucide="flask-conical" class="about-icon"></i>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-charcoal mb-3">Biomédica</h3>
+          <p class="text-gray-500 font-light text-sm leading-relaxed">
+            Formação em Biomedicina com profundo conhecimento técnico-científico sobre os insumos, protocolos e fisiologia dos tratamentos — garantindo máxima segurança.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="max-w-2xl mx-auto">
+        <div class="quote-block">
+          <p class="text-lg md:text-xl font-serif italic text-charcoal leading-relaxed mb-3">
+            "Meu compromisso é com resultados naturais — que realcem a sua beleza única sem apagar quem você é."
+          </p>
+          <p class="text-sm font-medium tracking-wider" style="color:#b8966e">— Dra. Kamila Azevedo</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== PROCEDURES ===================== -->
+  <section id="procedimentos" class="py-24 px-5 bg-white">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Header -->
+      <div class="text-center mb-4">
+        <span class="section-label">Procedimentos</span>
+      </div>
+      <div class="gold-line mb-6"></div>
+      <h2 class="text-3xl md:text-4xl font-serif text-center text-charcoal mb-4">
+        Tratamentos de Excelência
+      </h2>
+      <p class="text-center text-gray-500 font-light text-sm max-w-xl mx-auto mb-14">
+        Cada procedimento é planejado individualmente, com protocolos rigorosos e materiais de alta qualidade certificados.
+      </p>
+
+      <!-- Cards Grid -->
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Card 1: Toxina Botulínica -->
+        <div class="procedure-card bg-white p-8 shadow-sm">
+          <div class="mb-4">
+            <i data-lucide="zap" style="width:32px;height:32px;color:#b8966e;stroke-width:1.5;"></i>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-charcoal mb-2">Toxina Botulínica</h3>
+          <p class="proc-tag mb-3">Preventivo e Reparador</p>
+          <p class="text-gray-500 font-light text-sm leading-relaxed mb-5">
+            Tratamento preventivo e reparador das linhas de expressão, preservando a naturalidade dos seus movimentos faciais com precisão cirúrgica.
+          </p>
+          <a href="https://wa.me/5521998979105" target="_blank" class="saiba-mais">
+            Saiba mais <span>→</span>
+          </a>
+        </div>
+
+        <!-- Card 2: Preenchimento Facial -->
+        <div class="procedure-card bg-white p-8 shadow-sm">
+          <div class="mb-4">
+            <i data-lucide="droplets" style="width:32px;height:32px;color:#b8966e;stroke-width:1.5;"></i>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-charcoal mb-2">Preenchimento Facial</h3>
+          <p class="proc-tag mb-3">Harmonização e Volume</p>
+          <p class="text-gray-500 font-light text-sm leading-relaxed mb-5">
+            Restauração de volumes e harmonização dos contornos faciais com ácido hialurônico premium cuidadosamente selecionado para cada paciente.
+          </p>
+          <a href="https://wa.me/5521998979105" target="_blank" class="saiba-mais">
+            Saiba mais <span>→</span>
+          </a>
+        </div>
+
+        <!-- Card 3: Bioestimuladores -->
+        <div class="procedure-card bg-white p-8 shadow-sm">
+          <div class="mb-4">
+            <i data-lucide="sparkles" style="width:32px;height:32px;color:#b8966e;stroke-width:1.5;"></i>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-charcoal mb-2">Bioestimuladores de Colágeno</h3>
+          <p class="proc-tag mb-3">Firmeza e Sustentação</p>
+          <p class="text-gray-500 font-light text-sm leading-relaxed mb-5">
+            Estimulação da produção natural de colágeno para firmeza, sustentação e rejuvenescimento progressivo e duradouro da pele.
+          </p>
+          <a href="https://wa.me/5521998979105" target="_blank" class="saiba-mais">
+            Saiba mais <span>→</span>
+          </a>
+        </div>
+
+        <!-- Card 4: Rinomodelação -->
+        <div class="procedure-card bg-white p-8 shadow-sm">
+          <div class="mb-4">
+            <i data-lucide="triangle" style="width:32px;height:32px;color:#b8966e;stroke-width:1.5;"></i>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-charcoal mb-2">Rinomodelação</h3>
+          <p class="proc-tag mb-3">Refinamento Nasal sem Cirurgia</p>
+          <p class="text-gray-500 font-light text-sm leading-relaxed mb-5">
+            Refinamento e harmonização do nariz sem procedimento cirúrgico, com resultados precisos, seguros e completamente naturais.
+          </p>
+          <a href="https://wa.me/5521998979105" target="_blank" class="saiba-mais">
+            Saiba mais <span>→</span>
+          </a>
+        </div>
+
+        <!-- Card 5: Lipo de Papada — centered -->
+        <div class="procedure-card bg-white p-8 shadow-sm md:col-span-2 md:max-w-lg md:mx-auto w-full">
+          <div class="mb-4">
+            <i data-lucide="scissors" style="width:32px;height:32px;color:#b8966e;stroke-width:1.5;"></i>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-charcoal mb-2">Lipo de Papada Enzimática</h3>
+          <p class="proc-tag mb-3">Definição do Contorno Facial</p>
+          <p class="text-gray-500 font-light text-sm leading-relaxed mb-5">
+            Dissolução enzimática localizada para definir o contorno mandibular e cervical com total segurança, sem cirurgia e com resultados progressivos.
+          </p>
+          <a href="https://wa.me/5521998979105" target="_blank" class="saiba-mais">
+            Saiba mais <span>→</span>
+          </a>
+        </div>
+
+      </div><!-- /grid -->
+    </div>
+  </section>
+
+  <!-- ===================== INSTAGRAM ===================== -->
+  <section class="py-24 px-5 text-center" style="background:#fdf5e6;">
+    <div class="max-w-2xl mx-auto">
+
+      <!-- Instagram Icon SVG -->
+      <div class="flex justify-center mb-6">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#b8966e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.5" cy="6.5" r="0.8" fill="#b8966e" stroke="none"></circle>
+        </svg>
+      </div>
+
+      <span class="section-label block mb-4">Instagram</span>
+      <div class="gold-line mb-6"></div>
+
+      <h2 class="text-3xl md:text-4xl font-serif text-charcoal mb-4">
+        Resultados Reais,<br>
+        <em class="font-normal" style="color:#b8966e">Beleza Autêntica</em>
+      </h2>
+
+      <p class="text-gray-500 font-light text-sm leading-relaxed mb-8 max-w-sm mx-auto">
+        Acompanhe os procedimentos, resultados e novidades da Dra. Kamila no Instagram.
+      </p>
+
+      <a href="https://www.instagram.com/dra_kamila_azevedo" target="_blank"
+         class="ig-handle font-serif block mb-8 transition-all duration-300 hover:opacity-70"
+         style="color:#b8966e;">
+        @dra_kamila_azevedo
+      </a>
+
+      <a href="https://www.instagram.com/dra_kamila_azevedo" target="_blank"
+         class="btn-outline-gold text-sm font-medium px-8 py-4 rounded-sm tracking-wider inline-block mb-5">
+        Seguir no Instagram
+      </a>
+
+      <p class="text-xs text-gray-400 font-light tracking-widest mt-4">
+        Conteúdo educativo e resultados reais todos os dias
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ===================== CTA BANNER ===================== -->
+  <section id="contato" class="py-24 px-5 bg-white text-center">
+    <div class="max-w-2xl mx-auto">
+
+      <div class="gold-line mb-8"></div>
+
+      <h2 class="text-3xl md:text-4xl font-serif text-charcoal mb-5">
+        Pronta para Dar o<br>
+        <em class="font-normal" style="color:#b8966e">Próximo Passo?</em>
+      </h2>
+
+      <p class="text-gray-500 font-light leading-relaxed mb-10 max-w-md mx-auto">
+        Agende sua avaliação e descubra o tratamento ideal para você. Atendimento humanizado, personalizado e com rigor científico.
+      </p>
+
+      <a href="https://wa.me/5521998979105" target="_blank"
+         class="btn-gold text-sm font-semibold px-10 py-5 rounded-sm tracking-wider inline-block">
+        ✦ Agendar Minha Consulta
+      </a>
+
+      <p class="text-xs text-gray-400 font-light tracking-widest mt-6">
+        Resposta rápida pelo WhatsApp &nbsp;·&nbsp; Atendimento humanizado
+      </p>
+
+      <div class="gold-line mt-8"></div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="py-16 px-5" style="background:#2d2d2d;color:rgba(255,255,255,0.75);">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Logo centered -->
+      <div class="flex justify-center mb-12">
+        <img src="https://www.genspark.ai/api/files/s/z3DSL9r5" alt="Dra. Kamila Azevedo" class="h-12 w-auto opacity-80">
+      </div>
+
+      <!-- 3 columns -->
+      <div class="grid md:grid-cols-3 gap-10 mb-12 text-sm">
+
+        <!-- Col 1 -->
+        <div class="text-center md:text-left">
+          <h4 class="font-serif text-white text-base mb-3">Clínica</h4>
+          <div class="gold-line-full mb-4" style="width:40px;margin:0 0 16px 0;"></div>
+          <p class="font-light text-xs leading-relaxed" style="color:rgba(255,255,255,0.6)">
+            Dra. Kamila Azevedo<br>
+            Estética Avançada<br><br>
+            Medicina &amp; Biomedicina<br>
+            Procedimentos Minimamente<br>Invasivos
+          </p>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="text-center">
+          <h4 class="font-serif text-white text-base mb-3">Procedimentos</h4>
+          <div class="gold-line mb-4"></div>
+          <ul class="space-y-2 font-light text-xs" style="color:rgba(255,255,255,0.6)">
+            <li>Toxina Botulínica</li>
+            <li>Preenchimento Facial</li>
+            <li>Bioestimuladores de Colágeno</li>
+            <li>Rinomodelação</li>
+            <li>Lipo de Papada Enzimática</li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="text-center md:text-right">
+          <h4 class="font-serif text-white text-base mb-3">Contato</h4>
+          <div class="gold-line-full mb-4" style="width:40px;margin:0 0 16px auto;"></div>
+          <div class="space-y-3 font-light text-xs" style="color:rgba(255,255,255,0.6)">
+            <div>
+              <a href="https://www.instagram.com/dra_kamila_azevedo" target="_blank"
+                 class="hover:text-gold transition-colors duration-200 flex items-center gap-2 justify-center md:justify-end">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"></circle>
+                </svg>
+                @dra_kamila_azevedo
+              </a>
+            </div>
+            <div>
+              <a href="https://wa.me/5521998979105" target="_blank"
+                 class="hover:text-gold transition-colors duration-200 flex items-center gap-2 justify-center md:justify-end">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                (21) 99897-9105
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold separator -->
+      <div style="height:1px;background:rgba(184,150,110,0.3);margin-bottom:20px;"></div>
+
+      <!-- Copyright -->
+      <p class="text-center text-xs font-light tracking-widest" style="color:rgba(255,255,255,0.35)">
+        © 2025 Dra. Kamila Azevedo · Desenvolvido com excelência
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- ===================== FLOATING WHATSAPP ===================== -->
+  <a href="https://wa.me/5521998979105" target="_blank"
+     class="float-btn float-pulse"
+     aria-label="Fale conosco pelo WhatsApp">
+    <span class="float-tooltip">Fale Conosco</span>
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#25D366">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- ===================== JS ===================== -->
+  <script>
+    // Navbar scroll shadow
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Mobile menu toggle
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (burger) {
+      burger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    // Close mobile menu on link click
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
